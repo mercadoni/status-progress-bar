@@ -6,5 +6,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "StatusProgressBar"
-include ':app'
+include ':sample'
 include ':StatusProgressBar'

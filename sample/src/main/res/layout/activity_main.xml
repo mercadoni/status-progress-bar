@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <io.instaleap.statusprogressbar.LinearStateBar
+        android:id="@+id/linear_bar"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="ADD"
+        app:layout_constraintEnd_toStartOf="@+id/bt_pending"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_bar" />
+
+    <Button
+        android:id="@+id/bt_pending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PENDING"
+        app:layout_constraintEnd_toStartOf="@+id/bt_removed"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bt_add"
+        app:layout_constraintTop_toTopOf="@+id/bt_add" />
+
+    <Button
+        android:id="@+id/bt_removed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REMOVED"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bt_pending"
+        app:layout_constraintTop_toTopOf="@+id/bt_pending" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_custom_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_pending" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
