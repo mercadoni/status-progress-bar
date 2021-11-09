@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">StatusProgressBar</string>
+
+    <string name="button_add_action">ADD</string>
+    <string name="button_remove_action">REMOVE</string>
+    <string name="button_pending_action">PENDING</string>
+
+    <string name="title_section_recycler">How looks in a RecyclerView</string>
 </resources>

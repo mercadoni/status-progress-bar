@@ -25,7 +25,7 @@ class DataModelAdapter : ListAdapter<DataModelView, DataModelAdapter.ItemViewHol
     inner class ItemViewHolder(private val binding: ItemDataListBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DataModelView) {
             with(binding) {
-                linearStateBarProducts.setDataModelView(item.dataList, item.totalValue)
+                lsBarProducts.setDataModelView(item.dataList, item.totalValue)
             }
         }
     }

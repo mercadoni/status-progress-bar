@@ -2,7 +2,7 @@
 <resources>
     <declare-styleable name="LinearStateBar">
         <attr name="fontSize" format= "integer" />
-        <attr name="heightLineStatus" format= "float" />
+        <attr name="heightLineStatus" format= "integer" />
         <attr name="fontColor" format="color"/>
     </declare-styleable>
 </resources>

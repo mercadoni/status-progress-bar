@@ -25,7 +25,7 @@ class LinearStateBar @JvmOverloads constructor(
     private val cornerRadius = 16f
 
     private val textFontSize: Int
-    private val lineHeight: Float
+    private val lineHeight: Int
     private val textColor: Int
 
     private var dataList: List<DataModelState>? = null
@@ -40,7 +40,7 @@ class LinearStateBar @JvmOverloads constructor(
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.LinearStateBar, defStyleAttr,0)
         textFontSize = typedArray.getInteger(R.styleable.LinearStateBar_fontSize, 12)
-        lineHeight = typedArray.getFloat(R.styleable.LinearStateBar_heightLineStatus, 10f)
+        lineHeight = typedArray.getInteger(R.styleable.LinearStateBar_heightLineStatus, 10)
         textColor = typedArray.getColor(R.styleable.LinearStateBar_fontColor, Color.BLACK)
         typedArray.recycle()
     }
@@ -167,7 +167,7 @@ class LinearStateBar @JvmOverloads constructor(
         if (rx < 0) rx = 0f
         if (ry < 0) ry = 0f
         val width = right - left
-        val height = lineHeight
+        val height = lineHeight.toFloat()
         if (rx > width / 2) rx = width / 2
         if (ry > height / 2) ry = height / 2
         val widthMinusCorners = width - 2 * rx

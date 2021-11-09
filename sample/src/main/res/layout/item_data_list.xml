@@ -5,12 +5,12 @@
     android:layout_height="wrap_content">
 
     <io.instaleap.statusprogressbar.LinearStateBar
-        android:id="@+id/linear_state_bar_products"
+        android:id="@+id/ls_bar_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/all_dimen_16"
+        android:layout_marginTop="@dimen/all_dimen_16"
+        android:layout_marginEnd="@dimen/all_dimen_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

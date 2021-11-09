@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             }
             mainViewModel.dataList.observe(this@MainActivity) { products ->
                 rvCustomView.adapter?.let { adapter ->
-                    (adapter as DataModelAdapter).submitList(products)
+                    (adapter as? DataModelAdapter)?.submitList(products)
                 }
             }
         }
