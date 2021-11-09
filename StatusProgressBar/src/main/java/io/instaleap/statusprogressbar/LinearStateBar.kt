@@ -24,6 +24,10 @@ class LinearStateBar @JvmOverloads constructor(
     private var heightLine: Int = 0
     private val cornerRadius = 16f
 
+    private val textFontSize: Int
+    private val lineHeight: Float
+    private val textColor: Int
+
     private var dataList: List<DataModelState>? = null
     private var totalValue: Int? = null
 
@@ -33,12 +37,18 @@ class LinearStateBar @JvmOverloads constructor(
         currentBarPaint = Paint()
         labelPaint = TextPaint()
         circlePaint = Paint()
+
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.LinearStateBar, defStyleAttr,0)
+        textFontSize = typedArray.getInteger(R.styleable.LinearStateBar_fontSize, 12)
+        lineHeight = typedArray.getFloat(R.styleable.LinearStateBar_heightLineStatus, 10f)
+        textColor = typedArray.getColor(R.styleable.LinearStateBar_fontColor, Color.BLACK)
+        typedArray.recycle()
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        canvas?.save()
+        canvas.save()
 
         var leftBoundary = 2f
         var rightBoundary = 0f
@@ -62,15 +72,15 @@ class LinearStateBar @JvmOverloads constructor(
                 drawCircleState(canvas, model, circleCX)
                 drawLabels(canvas, model, startLabelDx)
 
-                circleCX += (35f + labelPaint.measureText(model.value.toString() + " " + model.label) + 20f)
-                startLabelDx += (labelPaint.measureText(model.value.toString() + " " + model.label) + 55f)
+                circleCX += (35f + labelPaint.measureText(model.value.toString()+" "+model.label) +20f)
+                startLabelDx += (labelPaint.measureText(model.value.toString()+" "+model.label) + 55f)
             }
         }
         invalidate()
     }
 
     private fun drawLinearBar(
-        canvas: Canvas?,
+        canvas: Canvas,
         leftBoundary: Float,
         rightBoundary: Float,
         model: DataModelState
@@ -88,24 +98,24 @@ class LinearStateBar @JvmOverloads constructor(
             rx = cornerRadius,
             ry = cornerRadius
         )
-        canvas?.drawPath(boundaryPath, currentBarPaint)
+        canvas.drawPath(boundaryPath, currentBarPaint)
     }
 
-    private fun drawLabels(canvas: Canvas?, model: DataModelState, startDx: Float) {
+    private fun drawLabels(canvas: Canvas, model: DataModelState, startDx: Float) {
         labelPaint.apply {
             isAntiAlias = true
-            textSize = 12 * resources.displayMetrics.density
-            color = Color.BLACK
+            textSize = textFontSize * resources.displayMetrics.density
+            color = textColor
         }
-        canvas?.drawText(model.value.toString() + " " + model.label, startDx, 70f, labelPaint)
+        canvas.drawText(model.value.toString()+" "+model.label, startDx, 70f, labelPaint)
     }
 
-    private fun drawCircleState(canvas: Canvas?, model: DataModelState, circleCx: Float) {
+    private fun drawCircleState(canvas: Canvas, model: DataModelState, circleCx: Float) {
         circlePaint.apply {
             style = Paint.Style.FILL
             color = model.color
         }
-        canvas?.drawCircle(circleCx, 55f, 20f / 2, circlePaint)
+        canvas.drawCircle(circleCx, 55f, 20f/2, circlePaint)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -113,7 +123,34 @@ class LinearStateBar @JvmOverloads constructor(
 
         widthLine = measuredWidth
         heightLine = measuredHeight
-        setMeasuredDimension(widthLine, heightLine)
+
+        val dimensions = measureDimensions(widthMeasureSpec, heightMeasureSpec)
+
+        setMeasuredDimension(dimensions.first, dimensions.second)
+    }
+
+    private fun measureDimensions(widthMeasureSpec: Int, heightMeasureSpec: Int) : Pair<Int, Int> {
+        val requestedWidth = MeasureSpec.getSize(widthMeasureSpec)
+        val requestedWidthMode = MeasureSpec.getMode(widthMeasureSpec)
+
+        val requestedHeight = MeasureSpec.getSize(heightMeasureSpec)
+        val requestedHeightMode = MeasureSpec.getMode(heightMeasureSpec)
+
+        val desiredWidth: Int = measuredWidth
+        val desiredHeight: Int = 80
+
+        val width = when (requestedWidthMode) {
+            MeasureSpec.EXACTLY -> requestedWidth
+            MeasureSpec.UNSPECIFIED -> desiredWidth
+            else -> requestedWidth.coerceAtMost(desiredWidth)
+        }
+
+        val height = when (requestedHeightMode) {
+            MeasureSpec.EXACTLY -> requestedHeight
+            MeasureSpec.UNSPECIFIED -> desiredHeight
+            else -> requestedHeight.coerceAtMost(desiredHeight)
+        }
+        return Pair(width, height)
     }
 
     private fun roundedRect(
@@ -130,7 +167,7 @@ class LinearStateBar @JvmOverloads constructor(
         if (rx < 0) rx = 0f
         if (ry < 0) ry = 0f
         val width = right - left
-        val height = 10f
+        val height = lineHeight
         if (rx > width / 2) rx = width / 2
         if (ry > height / 2) ry = height / 2
         val widthMinusCorners = width - 2 * rx
@@ -152,5 +189,4 @@ class LinearStateBar @JvmOverloads constructor(
         this.dataList = dataList
         this.totalValue = totalValue
     }
-
 }

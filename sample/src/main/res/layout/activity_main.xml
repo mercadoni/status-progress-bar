@@ -9,7 +9,9 @@
     <io.instaleap.statusprogressbar.LinearStateBar
         android:id="@+id/linear_bar"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
+        app:fontSize="12"
+        app:heightLineStatus="10"
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
@@ -22,7 +24,7 @@
         android:id="@+id/bt_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:text="ADD"
         app:layout_constraintEnd_toStartOf="@+id/bt_pending"
         app:layout_constraintHorizontal_bias="0.5"
@@ -49,14 +51,26 @@
         app:layout_constraintStart_toEndOf="@+id/bt_pending"
         app:layout_constraintTop_toTopOf="@+id/bt_pending" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="How looks in a RecycerView"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_pending" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_custom_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_pending" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

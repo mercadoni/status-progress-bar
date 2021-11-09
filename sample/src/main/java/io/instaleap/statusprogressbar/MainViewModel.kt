@@ -74,8 +74,7 @@ class MainViewModel : ViewModel() {
     }
 
     private fun getAllItemsQuantity(): Int {
-        return (_addedQuantity.value ?: 0) + (_removedQuantity.value ?: 0) + (_pendingQuantity.value
-            ?: 0)
+        return (_addedQuantity.value ?: 0) + (_removedQuantity.value ?: 0) + (_pendingQuantity.value ?: 0)
     }
 
     private fun setListDataModelView() {
@@ -83,40 +82,40 @@ class MainViewModel : ViewModel() {
             DataModelView(
                 dataList = listOf(
                     DataModelState("added", 5, StateColor.ADDED.color),
-                    DataModelState("added", 15, StateColor.PENDING.color),
-                    DataModelState("added", 5, StateColor.REMOVED.color),
+                    DataModelState("pendidng", 15, StateColor.PENDING.color),
+                    DataModelState("removed", 5, StateColor.REMOVED.color),
                 ),
                 totalValue = 20
             ),
             DataModelView(
                 dataList = listOf(
                     DataModelState("added", 5, StateColor.ADDED.color),
-                    DataModelState("added", 5, StateColor.PENDING.color),
-                    DataModelState("added", 5, StateColor.REMOVED.color),
+                    DataModelState("pendidng", 5, StateColor.PENDING.color),
+                    DataModelState("removed", 5, StateColor.REMOVED.color),
                 ),
                 totalValue = 15
             ),
             DataModelView(
                 dataList = listOf(
                     DataModelState("added", 0, StateColor.ADDED.color),
-                    DataModelState("added", 28, StateColor.PENDING.color),
-                    DataModelState("added", 2, StateColor.REMOVED.color),
+                    DataModelState("pendidng", 28, StateColor.PENDING.color),
+                    DataModelState("removed", 2, StateColor.REMOVED.color),
                 ),
                 totalValue = 30
             ),
             DataModelView(
                 dataList = listOf(
                     DataModelState("added", 2, StateColor.ADDED.color),
-                    DataModelState("added", 6, StateColor.PENDING.color),
-                    DataModelState("added", 2, StateColor.REMOVED.color),
+                    DataModelState("pendidng", 6, StateColor.PENDING.color),
+                    DataModelState("removed", 2, StateColor.REMOVED.color),
                 ),
                 totalValue = 10
             ),
             DataModelView(
                 dataList = listOf(
                     DataModelState("added", 0, StateColor.ADDED.color),
-                    DataModelState("added", 3, StateColor.PENDING.color),
-                    DataModelState("added", 0, StateColor.REMOVED.color),
+                    DataModelState("pendidng", 3, StateColor.PENDING.color),
+                    DataModelState("removed", 0, StateColor.REMOVED.color),
                 ),
                 totalValue = 3
             )
