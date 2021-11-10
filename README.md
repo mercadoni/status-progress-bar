@@ -1,33 +1,42 @@
-How to integrate the library in the app?
+# Status Progress Bar
 
-Step 1. Add it in root build.gradle at the end of repositories:
-    
+## OverView
+An Android custom view library to display data with color coded information in a Linear bar format with labels to indentfy each color.
+Is use by ShopperApp application (shopper-app-new).
+
+![screenshot](https://user-images.githubusercontent.com/56521677/141031669-96416ac0-687b-4a9c-89d4-66ab4ee0a3e4.png)
+
+
+### How to integrate the library in the app?
+
+**Step 1.** Add it in root build.gradle at the end of repositories:
+
     allprojects {
         repositories {
           TODO: pending
         }
     }
 
-Step 2. Add the dependency
+**Step 2.** Add the dependency
     
     dependencies {
         TODO: pending
     }
 
-Step 3. Add component to Layout file
+**Step 3.** Add component to Layout file
 
      <com.shopper.customviews.LinearStateBar
         android:id="@+id/linear_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
         
-Step 4. Custom the view.
+**Step 4.** Custom the view.
 
     app:fontSize="12" -> Can modify the fontSize
     app:heightLineStatus="10" -> Can modify thw height of LinearBar
 
 
-Step 5.  Refer this View in your activity/fragment file,
+**Step 5.**  Refer this View in your activity/fragment file,
          set a List<DataModelState> and the total value of items.
 
             DataModelView(
