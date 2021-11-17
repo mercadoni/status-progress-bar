@@ -4,20 +4,20 @@ import android.graphics.Color
 
 sealed class StateColor {
 
-    abstract val color: Int
+    abstract val color: String
 
     object Added : StateColor() {
-        override val color: Int
-            get() = Color.GREEN
+        override val color: String
+            get() = ColorBar.GREEN.hexColor
     }
 
     object Pending : StateColor() {
-        override val color: Int
-            get() = Color.GRAY
+        override val color: String
+            get() = ColorBar.GRAY.hexColor
     }
 
     object Removed : StateColor() {
-        override val color: Int
-            get() = Color.YELLOW
+        override val color: String
+            get() = ColorBar.YELLOW.hexColor
     }
 }

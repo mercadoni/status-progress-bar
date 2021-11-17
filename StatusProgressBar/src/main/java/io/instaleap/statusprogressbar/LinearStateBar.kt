@@ -20,9 +20,9 @@ class LinearStateBar @JvmOverloads constructor(
     private var circlePaint: Paint
     private var boundaryPath: Path
 
-    private var widthLine: Int = 0
-    private var heightLine: Int = 0
-    private val cornerRadius = 16f
+    private var widthLine: Int = ZERO_INT
+    private var heightLine: Int = ZERO_INT
+    private val cornerRadius = CORNER_RADIUS
 
     private val textFontSize: Int
     private val lineHeight: Int
@@ -38,9 +38,9 @@ class LinearStateBar @JvmOverloads constructor(
         labelPaint = TextPaint()
         circlePaint = Paint()
 
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.LinearStateBar, defStyleAttr,0)
-        textFontSize = typedArray.getInteger(R.styleable.LinearStateBar_fontSize, 12)
-        lineHeight = typedArray.getInteger(R.styleable.LinearStateBar_heightLineStatus, 10)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.LinearStateBar, defStyleAttr, ZERO_INT)
+        textFontSize = typedArray.getInteger(R.styleable.LinearStateBar_fontSize, DEFAULT_FONT_SIZE)
+        lineHeight = typedArray.getInteger(R.styleable.LinearStateBar_heightLineStatus, DEFAULT_HEIGHT_LINEAR_STATE_BAR)
         textColor = typedArray.getColor(R.styleable.LinearStateBar_fontColor, Color.BLACK)
         typedArray.recycle()
     }
@@ -50,10 +50,10 @@ class LinearStateBar @JvmOverloads constructor(
 
         canvas.save()
 
-        var leftBoundary = 2f
-        var rightBoundary = 0f
-        var circleCX = 15f
-        var startLabelDx = circleCX + 25f
+        var leftBoundary = INIT_LEFT_BOUNDARY_BAR
+        var rightBoundary = INIT_RIGHT_BOUNDARY_BAR
+        var circleCX = INIT_CENTER_POSITION_CIRCLE_X
+        var startLabelDx = circleCX + DISTANCE_CIRCLE_TO_LABEL_ADDED
 
         dataList?.let { data ->
             for (model in data) {
@@ -72,8 +72,8 @@ class LinearStateBar @JvmOverloads constructor(
                 drawCircleState(canvas, model, circleCX)
                 drawLabels(canvas, model, startLabelDx)
 
-                circleCX += (35f + labelPaint.measureText(model.value.toString()+" "+model.label) +20f)
-                startLabelDx += (labelPaint.measureText(model.value.toString()+" "+model.label) + 55f)
+                circleCX += (labelPaint.measureText("${model.value} ${model.label}") + DISTANCE_BETWEEN_LABELS_ADDED)
+                startLabelDx += (labelPaint.measureText("${model.value} ${model.label}") + DISTANCE_BETWEEN_LABELS_ADDED)
             }
         }
         invalidate()
@@ -87,7 +87,7 @@ class LinearStateBar @JvmOverloads constructor(
     ) {
         currentBarPaint.apply {
             style = Paint.Style.FILL
-            color = model.color
+            color = Color.parseColor(model.color)
         }
 
         boundaryPath = roundedRect(
@@ -107,15 +107,15 @@ class LinearStateBar @JvmOverloads constructor(
             textSize = textFontSize * resources.displayMetrics.density
             color = textColor
         }
-        canvas.drawText(model.value.toString()+" "+model.label, startDx, 70f, labelPaint)
+        canvas.drawText("${model.value} ${model.label}", startDx, DISTANCE_Y_LABEL_FROM_BAR, labelPaint)
     }
 
     private fun drawCircleState(canvas: Canvas, model: DataModelState, circleCx: Float) {
         circlePaint.apply {
             style = Paint.Style.FILL
-            color = model.color
+            color = Color.parseColor(model.color)
         }
-        canvas.drawCircle(circleCx, 55f, 20f/2, circlePaint)
+        canvas.drawCircle(circleCx, CENTER_POSITION_CIRCLE_Y, CIRCLE_RADIUS, circlePaint)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -137,7 +137,7 @@ class LinearStateBar @JvmOverloads constructor(
         val requestedHeightMode = MeasureSpec.getMode(heightMeasureSpec)
 
         val desiredWidth: Int = measuredWidth
-        val desiredHeight: Int = 80
+        val desiredHeight: Int = DESIRED_HEIGHT_MEASURE_DIMENSIONS
 
         val width = when (requestedWidthMode) {
             MeasureSpec.EXACTLY -> requestedWidth

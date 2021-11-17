@@ -64,6 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/match_constraint"
         android:layout_marginTop="@dimen/all_dimen_16"
+        android:layout_marginBottom="@dimen/all_dimen_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -2,9 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="caribbean_green">#00d59e</color>
+    <color name="caribbean_green">#00D59E</color>
     <color name="green_blue">#01B183</color>
-    <color name="sky_blue">#5c9efa</color>
+    <color name="sky_blue">#5C9EFA</color>
     <color name="royal_blue">#3366FF</color>
     <color name="energy_yellow">#F9D350</color>
     <color name="alto">#D8D8D8</color>

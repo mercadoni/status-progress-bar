@@ -53,21 +53,21 @@ class MainViewModel : ViewModel() {
         dataModelStateList.clear()
         dataModelStateList.add(
             DataModelState(
-                "added",
+                ProductState.Added.rawType,
                 (_addedQuantity.value ?: ZERO_ITEMS),
                 StateColor.Added.color
             )
         )
         dataModelStateList.add(
             DataModelState(
-                "pendidng",
+                ProductState.Pending.rawType,
                 (_pendingQuantity.value ?: ZERO_ITEMS),
                 StateColor.Pending.color
             )
         )
         dataModelStateList.add(
             DataModelState(
-                "removed",
+                ProductState.Removed.rawType,
                 (_removedQuantity.value ?: ZERO_ITEMS),
                 StateColor.Removed.color
             )
@@ -86,49 +86,34 @@ class MainViewModel : ViewModel() {
         return if(totalItems > 0) totalItems else DEFAULT_ITEMS
     }
 
-    private fun setListDataModelView() {
-        val dataModelList = listOf(
-            DataModelView(
-                dataList = listOf(
-                    DataModelState("added", 5, StateColor.Added.color),
-                    DataModelState("pendidng", 15, StateColor.Pending.color),
-                    DataModelState("removed", 5, StateColor.Removed.color),
-                ),
-                totalValue = 20
-            ),
-            DataModelView(
-                dataList = listOf(
-                    DataModelState("added", 5, StateColor.Added.color),
-                    DataModelState("pendidng", 5, StateColor.Pending.color),
-                    DataModelState("removed", 5, StateColor.Removed.color),
-                ),
-                totalValue = 15
-            ),
-            DataModelView(
-                dataList = listOf(
-                    DataModelState("added", 0, StateColor.Added.color),
-                    DataModelState("pendidng", 28, StateColor.Pending.color),
-                    DataModelState("removed", 2, StateColor.Removed.color),
-                ),
-                totalValue = 30
-            ),
-            DataModelView(
-                dataList = listOf(
-                    DataModelState("added", 2, StateColor.Added.color),
-                    DataModelState("pendidng", 6, StateColor.Pending.color),
-                    DataModelState("removed", 2, StateColor.Removed.color),
-                ),
-                totalValue = 10
-            ),
-            DataModelView(
-                dataList = listOf(
-                    DataModelState("added", 0, StateColor.Added.color),
-                    DataModelState("pendidng", 3, StateColor.Pending.color),
-                    DataModelState("removed", 0, StateColor.Removed.color),
-                ),
-                totalValue = 3
-            )
+    private fun getTotalValue(dataList: List<DataModelState>) : Int {
+        var totalValue = ZERO_ITEMS
+        for (model in dataList) {
+            totalValue += model.value
+        }
+        return totalValue
+    }
+
+    private fun getRandomValue(): Int {
+        return (INIT_RANDOM_VALUE..END_RANDOM_VALUE).random()
+    }
+
+    private fun createDataModelStateList(): Pair<List<DataModelState>, Int> {
+        val dataList = listOf(
+            DataModelState(ProductState.Added.rawType, getRandomValue(), StateColor.Added.color),
+            DataModelState(ProductState.Pending.rawType, getRandomValue(), StateColor.Pending.color),
+            DataModelState(ProductState.Removed.rawType, getRandomValue(), StateColor.Removed.color),
         )
+        return Pair(dataList, getTotalValue(dataList))
+    }
+
+    private fun setListDataModelView() {
+        val dataModelList: MutableList<DataModelView> = mutableListOf()
+
+        for (i in ZERO_RANGE..TEN_RANGE) {
+            val dataModelState = createDataModelStateList()
+            dataModelList.add(DataModelView(dataModelState.first, dataModelState.second))
+        }
 
         _dataList.postValue(dataModelList)
     }
