@@ -1,6 +1,11 @@
 <h1 align="center">Status Progress Bar</h1></br>
 
 <p align="center">
+<img alt="api" src="https://img.shields.io/badge/API-21%2B-green?logo=android"/>
+<img alt="license" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/>
+</p>
+
+<p align="center">
 An Android custom view library to display data with color coded information in a Linear bar format with labels to indentfy each color.
 Is use by ShopperApp application (shopper-app-new).
 </p><br>
