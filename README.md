@@ -26,20 +26,23 @@ Is use by ShopperApp application (shopper-app-new).
         TODO: pending
     }
 ```
-**Step 3.** Add component to Layout file
+
+## How to usage the library in the app?
+
+**Step 1.** Add component to Layout file
 ```xml
      <com.shopper.customviews.LinearStateBar
         android:id="@+id/linear_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 ```
-**Step 4.** Custom the view.
+**Step 2.** Custom the view.
 ```xml
     app:fontSize="12" -> Can modify the fontSize
     app:heightLineStatus="10" -> Can modify the height of LinearBar
 ```
 
-**Step 5.**  Refer this View in your activity/fragment file, set a `List<DataModelState>` and the total value of items.
+**Step 3.** Set a `List<DataModelState>` and the total value of items.
 ```kotlin
     DataModelView(
         val dataList: List<DataModelState>,
@@ -51,14 +54,7 @@ Is use by ShopperApp application (shopper-app-new).
         val value: Int,
         val color: Int
     )
-```
-
-- The second param on DataModelView is the entire span linear bar view. 
-- And value param in each DataModelState object will occupy a percent length.
-- Width of each item is calculated by `model.value / range * viewWidth`.
-
-### Example:
-```kotlin
+    
     DataModelView(
         dataList = listOf(
             DataModelState("Label 1", 10, color),
@@ -69,7 +65,14 @@ Is use by ShopperApp application (shopper-app-new).
     )
 ```
 
-### Getting the id component (linearBar) and set data:
+
+- The second param on DataModelView is the entire span linear bar view. 
+- And value param in each DataModelState object will occupy a percent length.
+- Width of each item is calculated by `model.value / range * viewWidth`.
+
+
+
+**Step 4.** Refer this View in your activity/fragment file, getting the id component (linearBar) and set data:
 ``` kotlin
     binding.linearBar.setDataModelView(List<DataModelState>, totalValue)
 ```     
