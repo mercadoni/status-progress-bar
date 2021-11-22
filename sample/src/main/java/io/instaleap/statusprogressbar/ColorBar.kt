@@ -1,7 +1,7 @@
 package io.instaleap.statusprogressbar
 
 enum class ColorBar(val hexColor: String) {
-    GREEN("#00D59E"),
-    GRAY("#D8D8D8"),
-    YELLOW("#F9D350")
+    GREEN(GREEN_COLOR_BAR),
+    GRAY(GRAY_COLOR_BAR),
+    YELLOW(YELLOW_COLOR_BAR)
 }
