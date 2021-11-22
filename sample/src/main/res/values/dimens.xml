@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Integers  -->
+    <item name="all_integer_10" format="integer" type="integer">10</item>
+    <item name="all_integer_12" format="integer" type="integer">12</item>
+
+    <!-- Layout  -->
+    <dimen name="match_constraint">0dp</dimen>
+    <dimen name="all_dimen_8">8dp</dimen>
+    <dimen name="all_dimen_10">10dp</dimen>
+    <dimen name="all_dimen_16">16dp</dimen>
+    <dimen name="all_dimen_24">24dp</dimen>
+    <dimen name="all_dimen_32">32dp</dimen>
+    <dimen name="all_dimen_48">48dp</dimen>
+
+</resources>
