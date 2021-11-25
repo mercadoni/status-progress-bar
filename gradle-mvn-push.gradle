@@ -1,0 +1,52 @@
+apply plugin: 'maven-publish'
+
+
+def libraryGroupId = GROUP
+def libraryVersion = mVersion// the version code define the library to be consumed
+def libraryArtifact = "statusprogressbar"
+def libraryPath=  "$buildDir/outputs/aar/StatusProgressBar-release.aar"
+def dependencyTree = "debugImplementation"
+
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId libraryGroupId
+            version libraryVersion
+            artifactId libraryArtifact
+
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+                //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.getByName(dependencyTree).allDependencies.each {
+                    if (it.name != 'unspecified') {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+            }
+            artifact libraryPath
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            /** Configure path of your package repository on Github
+             ** Replace GITHUB_USERID with your/organisation Github userID
+             ** and REPOSITORY with the repository name on GitHub
+             */
+            url = uri("https://maven.pkg.github.com/mercadoni/status-progress-bar")
+            credentials {
+                /** Create github.properties in root project folder file with
+                 ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
+                 ** Set env variable GPR_USER & GPR_API_KEY if not adding a properties file**/
+
+                username = "Javalenciab90"
+                password = "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"
+            }
+        }
+    }
+}
